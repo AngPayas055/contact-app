@@ -1,0 +1,49 @@
+<div class="j-cont">
+
+
+
+    <h2>mat-table with custom sortingDataAccessor</h2>
+
+    <table
+        mat-table
+        [dataSource]="dataSourceWithObjectColumn"
+        class="mat-elevation-z8"
+        matSort
+        #empTbSortWithObject="matSort"
+        >
+        <ng-container
+            [matColumnDef]="column"
+            *ngFor="let column of displayedColumnsWithObject; let i = index"
+        >
+            <ng-container>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header >{{ header[i] }}</th>
+            </ng-container>
+            <ng-container *ngIf="column == 'project.name'">
+                <td mat-cell *matCellDef="let emp">{{ emp.project.name }}</td>
+            </ng-container>
+            <ng-container *ngIf="column != 'project.name'">
+                <td mat-cell *matCellDef="let emp">{{ emp[column] }}</td>
+            </ng-container>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsWithObject"></tr>
+        <tr mat-row *matRowDef="let emprow; columns: displayedColumnsWithObject"></tr>
+    </table>
+
+
+
+
+
+
+
+
+
+    <!-- <h1>Where this is h1 The Quick brown fox jumps over the lazy dogs</h1>
+    <h2>this is the h2</h2> 
+    <h3>this is h3sdfhsjdf</h3>
+    <h4>this is h4asdf jsss</h4>
+    <h5>this is h5 lkasdsss</h5>
+    <p style="font-size: 18px;">this is p tag</p>
+    <div>this is div tag</div>
+    <span>this is span</span> -->
+</div>
