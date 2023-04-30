@@ -4,7 +4,9 @@ import { ContactComponent } from './contact.component';
 import { ContactRoutingModule } from './contact-routing.module';
 import { ContactMainComponent } from './contact-main/contact-main.component';
 import { MatTableModule } from '@angular/material/table' 
-import {MatSortModule} from '@angular/material/sort';
+import { MatSortModule } from '@angular/material/sort';
+import { MatIconModule } from "@angular/material/icon";
+import { MatButtonModule } from "@angular/material/button";
 
 
 @NgModule({
@@ -13,7 +15,9 @@ import {MatSortModule} from '@angular/material/sort';
     CommonModule,
     ContactRoutingModule,
     MatTableModule,
-    MatSortModule
+    MatSortModule,
+    MatIconModule,
+    MatButtonModule
   ],
   exports:[
     MatTableModule,
