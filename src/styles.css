@@ -11,3 +11,12 @@ body{
     max-width: 1600px;
     margin: 0 auto;
 }
+.d-flex{
+    display: flex;
+}
+.text-ceter{
+    text-align: center;
+}
+.margin-center{
+    margin: 0 auto;
+}

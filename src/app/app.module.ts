@@ -6,19 +6,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ContactModule } from './modules/contact/contact.module';
 import { AppRoutingModule } from './app-routing.module';
-//import { ContactComponent } from './modules/contact/contact.component';
+import { DialogModule } from './modules/contact/dialog/dialog.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    //ContactComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     MatSlideToggleModule,
     ContactModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

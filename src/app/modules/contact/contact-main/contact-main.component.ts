@@ -3,6 +3,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort,Sort } from '@angular/material/sort';
 import { Employee } from 'src/app/models/employee.model';
 import { Contact } from 'src/app/models/contact.model';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { ContactDialogComponent } from '../dialog/contact-dialog/contact-dialog.component'
 
 @Component({
   selector: 'app-contact-main',
@@ -25,12 +27,31 @@ export class ContactMainComponent implements OnInit {
   
   @ViewChild('empTbSortContact') empTbSortContact = new MatSort();
   @ViewChild('empTbSortWithObjectContact') empTbSortWithObjectContact = new MatSort();
+  
+  dataFromDialog: any;
 
-  constructor() { }
+  constructor(private dialog: MatDialog) { }
 
   onEdit(edit:any){
     console.log(edit)
+    const dialogRef = this.dialog.open(ContactDialogComponent, {
+      width: '350px',
+      height: '400px',
+      data: {
+        action: 'edit', 
+        data: edit,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((data) => {
+      console.log(data)
+      // this.dataFromDialog = data.form;
+      // if (data.clicked === 'submit') {
+      //   console.log('Sumbit button clicked');
+      // }
+    });
   }
+
   onDelete(deletevar:any){
     console.log(deletevar)
   }
