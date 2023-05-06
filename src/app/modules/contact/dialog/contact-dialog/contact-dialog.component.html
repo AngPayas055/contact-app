@@ -1,4 +1,4 @@
-<div class="contact-dialog-cont">
+<div class="contact-dialog-cont" *ngIf="isEdit">
   <h3>Edit Contact</h3>
 
 
@@ -13,27 +13,48 @@
 
   <mat-form-field appearance="outline" class="form-field">
     <mat-label>Full Name</mat-label>
-    <input matInput placeholder="ex. Eren Yeager" [(ngModel)]="editObj.fullName"  value="Sushi">
+    <input matInput placeholder="ex. Eren Yeager" [(ngModel)]="editObj.fullName"  value="Sushi" required>
     <mat-icon matSuffix>stars</mat-icon>
     <!-- <mat-hint>Hint</mat-hint> -->
+    <mat-error *ngIf="editObj.fullName?.trim().length === 0">Field is required.</mat-error>
+
   </mat-form-field><br>
   <mat-form-field appearance="outline" class="form-field">
     <mat-label>Mobile No.</mat-label>
-    <input matInput placeholder="ex. +639123456789r" [(ngModel)]="editObj.mobileNumber">
+    <input matInput placeholder="ex. +639123456789r" [(ngModel)]="editObj.mobileNumber" required>
     <mat-icon matSuffix>stars</mat-icon>
+    <mat-error *ngIf="editObj.mobileNumber?.trim().length === 0">Field is required.</mat-error>
   </mat-form-field><br>
+
   <mat-form-field appearance="outline" class="form-field">
     <mat-label>Email</mat-label>
-    <input matInput placeholder="ex. eren.yeager@email.com" [(ngModel)]="editObj.email">
+    <input matInput placeholder="ex. eren.yeager@email.com" [(ngModel)]="editObj.email" required email>
     <mat-icon matSuffix>stars</mat-icon>
+    <mat-error *ngIf="editObj.email?.trim().length && !editObj.email.match(emailRegex)">Please enter a valid email address.</mat-error>
   </mat-form-field><br>
-  <mat-form-field appearance="outline" class="form-field">
+
+  <!-- <mat-form-field appearance="outline" class="form-field">
     <mat-label>Date Updated</mat-label>
-    <input matInput placeholder="ex. May 2, 2023" [(ngModel)]="editObj.dateUpdated">
+    <input matInput placeholder="ex. May 2, 2023" [(ngModel)]="editObj.dateUpdated" required>
     <mat-icon matSuffix>stars</mat-icon>
-  </mat-form-field><br>
+    <mat-error *ngIf="editObj.dateUpdated?.trim().length === 0">Field is required.</mat-error>
+  </mat-form-field><br> -->
+
   <div class="action-cont">
     <button mat-raised-button mat-dialog-close color="warn" (click)="cancelEdit()">Cancel</button>
-    <button mat-raised-button mat-dialog-close color="primary" class="margin-left" (click)="submitEdit()">Update</button>
+    <button mat-raised-button mat-dialog-close color="primary" class="margin-left" (click)="submitEdit()"  
+      [disabled]="
+        editObj.fullName?.trim().length === 0 ||
+        editObj.mobileNumber?.trim().length === 0 ||
+        editObj.email?.trim().length === 0 
+      ">Update
+    </button>
   </div><br>
+</div>
+<div *ngIf="isDelete">
+  <h3>Delete "{{contactName}}" ?</h3>
+  <div>
+    <button mat-raised-button mat-dialog-close color="primary" (click)="cancelDelete()" class="j-btn-cancel">Cancel</button>
+    <button mat-raised-button mat-dialog-close color="warn" (click)="confirmDelete()">Delete</button>
+  </div>
 </div>

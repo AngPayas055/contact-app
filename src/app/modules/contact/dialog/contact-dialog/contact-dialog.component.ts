@@ -9,6 +9,9 @@ import { FormControl } from '@angular/forms';
 })
 export class ContactDialogComponent implements OnInit {
     
+  isEdit:boolean = false
+  isDelete:boolean = false
+  contactName: string = ""
   ctList: any = [
     {contactType: "Personal"},
     {contactType: "Service"},
@@ -22,7 +25,8 @@ export class ContactDialogComponent implements OnInit {
     contactType: "",
     dateUpdated: ""
   }
-  
+  emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
   selectedContactType: string = "zzz";  
   selectedContactControl = new FormControl(this.selectedContactType);
 
@@ -31,17 +35,36 @@ export class ContactDialogComponent implements OnInit {
     private dialogRef: MatDialogRef<ContactDialogComponent>,
     @Inject(MAT_DIALOG_DATA) data: any
     ){ 
+      if(data.action == 'edit'){
+        this.isEdit = true
+      }else if(data.action == 'delete'){
+        this.isDelete = true
+        this.contactName = data.data.fullName
+      }
       this.editObj = data.data
   }
   cancelEdit(){
     this.dialogRef.close()
   }
   submitEdit(){
+    if(this.editObj.email?.trim().length && !this.editObj.email.match(this.emailRegex)){
+      alert("Invalid Email")
+      return
+    }
     this.dialogRef.close({
       clicked: 'submit',
       updatedData: this.editObj,
     });
-  }  
+  } 
+  cancelDelete(){
+    this.dialogRef.close()
+  } 
+  confirmDelete(){
+    this.dialogRef.close({
+      clicked: 'confirm',
+      updatedData: this.editObj,
+    });    
+  } 
   ngOnInit(): void {
   }
 
