@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-contact-dialog',
@@ -7,14 +8,40 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./contact-dialog.component.css']
 })
 export class ContactDialogComponent implements OnInit {
+    
+  ctList: any = [
+    {contactType: "Personal"},
+    {contactType: "Service"},
+    {contactType: "Emergency"}
+  ];
+
+  editObj: any = {
+    fullName: "gf",
+    mobileNumber: "",
+    email: "",
+    contactType: "",
+    dateUpdated: ""
+  }
+  
+  selectedContactType: string = "zzz";  
+  selectedContactControl = new FormControl(this.selectedContactType);
 
   constructor(    
+    public dialog: MatDialog,
     private dialogRef: MatDialogRef<ContactDialogComponent>,
     @Inject(MAT_DIALOG_DATA) data: any
-  ) { 
-    console.log('test',data)
-   }
-
+    ){ 
+      this.editObj = data.data
+  }
+  cancelEdit(){
+    this.dialogRef.close()
+  }
+  submitEdit(){
+    this.dialogRef.close({
+      clicked: 'submit',
+      updatedData: this.editObj,
+    });
+  }  
   ngOnInit(): void {
   }
 

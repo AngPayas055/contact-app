@@ -7,6 +7,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ContactModule } from './modules/contact/contact.module';
 import { AppRoutingModule } from './app-routing.module';
 import { DialogModule } from './modules/contact/dialog/dialog.module';
+import { MatSelectModule } from '@angular/material/select';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,9 @@ import { DialogModule } from './modules/contact/dialog/dialog.module';
     MatSlideToggleModule,
     ContactModule,
     AppRoutingModule,
+    MatSelectModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent],

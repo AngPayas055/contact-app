@@ -1,0 +1,16 @@
+.contact-dialog-cont{
+    max-height: calc(90vh - 50px);
+    padding-bottom: 15px;
+}
+.modal-cont{
+    border: 1px solid var(--primary-border-color);
+    border-radius: 15px;
+}
+.action-cont{
+    width: 100%;
+    display: flex;
+    justify-content: end;
+}
+.margin-left{
+    margin-left: 15px;
+}

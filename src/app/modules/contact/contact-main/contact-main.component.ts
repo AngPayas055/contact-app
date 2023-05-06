@@ -15,8 +15,8 @@ export class ContactMainComponent implements OnInit {
 
   //contact variables
 
-  contactDisplayedColumnsWithObject: string[] = ['fullName', 'mobileNumber', 'email', 'contactType','dateUpdated'];
-  contactHeader: string[] = ['Full Name', 'Mobile No.','Email','Contact type','Date Updated'];
+  contactDisplayedColumnsWithObject: string[] = [ 'contactType','fullName', 'mobileNumber', 'email','dateUpdated'];
+  contactHeader: string[] = ['Contact type','Full Name', 'Mobile No.','Email','Date Updated'];
   contactData: Contact[] = [
     {fullName: 'testName', mobileNumber: 'testnumber',email: 'testemail',contactType: 'testContactType',dateUpdated: "testdateupdated"},
     {fullName: 'testName2', mobileNumber: 'testnumber2',email: 'testemail2',contactType: 'testContactType2',dateUpdated: "testdateupdated2"},
@@ -33,10 +33,9 @@ export class ContactMainComponent implements OnInit {
   constructor(private dialog: MatDialog) { }
 
   onEdit(edit:any){
-    console.log(edit)
     const dialogRef = this.dialog.open(ContactDialogComponent, {
-      width: '350px',
-      height: '400px',
+      // width: '350px',
+      // height: '400px',
       data: {
         action: 'edit', 
         data: edit,
@@ -44,7 +43,7 @@ export class ContactMainComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((data) => {
-      console.log(data)
+      console.log('jzzzzz',data)
       // this.dataFromDialog = data.form;
       // if (data.clicked === 'submit') {
       //   console.log('Sumbit button clicked');
@@ -53,7 +52,6 @@ export class ContactMainComponent implements OnInit {
   }
 
   onDelete(deletevar:any){
-    console.log(deletevar)
   }
   
   ngOnInit(): void {
