@@ -18,9 +18,9 @@ export class ContactMainComponent implements OnInit {
   contactDisplayedColumnsWithObject: string[] = [ 'contactType','fullName', 'mobileNumber', 'email','dateUpdated'];
   contactHeader: string[] = ['Contact type','Full Name', 'Mobile No.','Email','Date Updated'];
   contactData: Contact[] = [
-    {fullName: 'testName', mobileNumber: 'testnumber',email: 'testemail',contactType: 'testContactType',dateUpdated: "testdateupdated"},
-    {fullName: 'testName2', mobileNumber: 'testnumber2',email: 'testemail2',contactType: 'testContactType2',dateUpdated: "testdateupdated2"},
-    {fullName: 'testName3', mobileNumber: 'testnumber3',email: 'testemail3',contactType: 'testContactType3',dateUpdated: "testdateupdated3"},
+    {id:1, fullName: 'testName', mobileNumber: 'testnumber',email: 'testemail',contactType: 'testContactType',dateUpdated: "testdateupdated"},
+    {id:2, fullName: 'testName2', mobileNumber: 'testnumber2',email: 'testemail2',contactType: 'testContactType2',dateUpdated: "testdateupdated2"},
+    {id:3, fullName: 'testName3', mobileNumber: 'testnumber3',email: 'testemail3',contactType: 'testContactType3',dateUpdated: "testdateupdated3"},
   ]
   contactDataSource = new MatTableDataSource(this.contactData);
   contactDataSourceWithObjectColumn = new MatTableDataSource(this.contactData);
@@ -34,8 +34,6 @@ export class ContactMainComponent implements OnInit {
 
   onEdit(edit:any){
     const dialogRef = this.dialog.open(ContactDialogComponent, {
-      // width: '350px',
-      // height: '400px',
       data: {
         action: 'edit', 
         data: edit,
@@ -43,11 +41,14 @@ export class ContactMainComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((data) => {
-      console.log('jzzzzz',data)
-      // this.dataFromDialog = data.form;
-      // if (data.clicked === 'submit') {
-      //   console.log('Sumbit button clicked');
-      // }
+      let dataId = data.updatedData.id
+      this.contactData = this.contactData.map(contact => {
+        if (contact.id === dataId) {
+          return data.updatedData
+        } else {
+          return contact;
+        }
+      });
     });
   }
 
@@ -55,6 +56,10 @@ export class ContactMainComponent implements OnInit {
   }
   
   ngOnInit(): void {
+    // console.log('j-sotrage',localStorage.getItem('jContactList'));
+    // if(localStorage.getItem('jContactList') == null){
+    //   console.log('jnull')
+    // }
   }
   
   ngAfterViewInit() {    

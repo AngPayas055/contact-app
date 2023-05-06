@@ -16,7 +16,7 @@ export class ContactDialogComponent implements OnInit {
   ];
 
   editObj: any = {
-    fullName: "gf",
+    fullName: "",
     mobileNumber: "",
     email: "",
     contactType: "",
