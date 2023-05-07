@@ -17,7 +17,8 @@ export class ContactDialogComponent implements OnInit {
     {contactType: "Service"},
     {contactType: "Emergency"}
   ];
-
+  headerText: string = "Edit"
+  submitText: string = "Update"
   editObj: any = {
     fullName: "",
     mobileNumber: "",
@@ -40,8 +41,14 @@ export class ContactDialogComponent implements OnInit {
       }else if(data.action == 'delete'){
         this.isDelete = true
         this.contactName = data.data.fullName
+      }else if( data.action == 'add'){
+        this.isEdit = true
+        this.headerText = "Add"
+        this.submitText = "Add"
       }
-      this.editObj = data.data
+      if(data.data){
+        this.editObj = data.data
+      }
   }
   cancelEdit(){
     this.dialogRef.close()

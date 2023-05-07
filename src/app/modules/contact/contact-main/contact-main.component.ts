@@ -22,6 +22,7 @@ export class ContactMainComponent implements OnInit {
   contactData: Contact[] = []
   contactDataSource = new MatTableDataSource(this.contactData);
   contactDataSourceWithObjectColumn = new MatTableDataSource(this.contactData);
+  colors:any = ['#003f5c','#bc5090','#ffa600']
   
   @ViewChild('empTbSortContact') empTbSortContact = new MatSort();
   @ViewChild('empTbSortWithObjectContact') empTbSortWithObjectContact = new MatSort();
@@ -52,6 +53,9 @@ export class ContactMainComponent implements OnInit {
           }
         });
         localStorage.setItem('jContactList', JSON.stringify(this.contactData));
+        this.contactDataSource.sort = this.empTbSortContact;
+        this.empTbSortWithObjectContact.disableClear = true;
+        this.contactDataSourceWithObjectColumn.sort = this.empTbSortWithObjectContact;
       }
     });
   }
@@ -70,20 +74,52 @@ export class ContactMainComponent implements OnInit {
         if (index !== -1) {
           this.contactData.splice(index, 1);
           localStorage.setItem('jContactList', JSON.stringify(this.contactData));
-          this.contactDataSource = new MatTableDataSource(this.contactData);
-          this.contactDataSourceWithObjectColumn = new MatTableDataSource(this.contactData);
-          return
+          this.contactDataSource.sort = this.empTbSortContact;
+          this.empTbSortWithObjectContact.disableClear = true;
+          this.contactDataSourceWithObjectColumn.sort = this.empTbSortWithObjectContact;
         }
       }
     });
   }
-  
+  onAdd(){
+    const dialogRef = this.dialog.open(ContactDialogComponent, {
+      data: {
+        action: 'add',
+      },
+    });
+    dialogRef.afterClosed().subscribe((data) => {
+      if(data){
+        // let lastObjId = this.contactData[]
+        data.updatedData.id = this.contactData[this.contactData.length - 1].id + 1
+        data.updatedData.dateUpdated = this.datePipe.transform(this.myDate, 'MMM d, y');
+        this.contactData.push(data.updatedData)
+        localStorage.setItem('jContactList', JSON.stringify(this.contactData));
+        this.contactDataSource.sort = this.empTbSortContact;
+        this.empTbSortWithObjectContact.disableClear = true;
+        this.contactDataSourceWithObjectColumn.sort = this.empTbSortWithObjectContact;
+        // let dataId = data.updatedData.id
+        // data.updatedData.dateUpdated = this.datePipe.transform(this.myDate, 'MMM d, y');
+        // this.contactData = this.contactData.map(contact => {
+        //   if (contact.id === dataId) {
+        //     return data.updatedData
+        //   } else {
+        //     return contact;
+        //   }
+        // });
+        // localStorage.setItem('jContactList', JSON.stringify(this.contactData));
+      }
+    });
+  }
   ngOnInit(): void {
     if(localStorage.getItem('jContactList') == null){
       let arr = [
-        {id:1, fullName: 'testName', mobileNumber: 'testnumber',email: 'testemail@test.com',contactType: 'testContactType',dateUpdated: "testdateupdated"},
-        {id:2, fullName: 'testName2', mobileNumber: 'testnumber2',email: 'testemail2@test.com',contactType: 'testContactType2',dateUpdated: "testdateupdated2"},
-        {id:3, fullName: 'testName3', mobileNumber: 'testnumber3',email: 'testemail3@test.com',contactType: 'testContactType3',dateUpdated: "testdateupdated3"},
+        {id:1, fullName: 'Levi Ackerman', mobileNumber: '+639123654223',email: 'levi@jmendiola.com',contactType: 'Personal',dateUpdated: "May 27, 2023"},
+        {id:2, fullName: 'London Police', mobileNumber: '+639888221312',email: 'lp.gov@mail.com',contactType: 'Emergency',dateUpdated: "April 6, 2023"},
+        {id:3, fullName: 'Manchester Vulcanizing', mobileNumber: '+639912328076',email: 'mctr.vulcanizing@gmail.com',contactType: 'Service',dateUpdated: "May 1, 2023"},
+        {id:4, fullName: 'Dagenham Pungko-pungko', mobileNumber: '+639022222812',email: 'dagenham.pungko@gmail.com',contactType: 'Service',dateUpdated: "May 8, 2023"},
+        {id:5, fullName: 'Hampton Pares', mobileNumber: '+639127340879',email: 'hampton.Pares@gmail.com',contactType: 'Service',dateUpdated: "May 1, 2023"},
+        {id:6, fullName: 'Emergency', mobileNumber: '911',email: 'lp.gov@mail.com',contactType: 'Emergency',dateUpdated: "April 6, 2023"},
+        {id:7, fullName: 'Manong Edgar', mobileNumber: '+639012904447',email: 'levi@jmendiola.com',contactType: 'Personal',dateUpdated: "May 27, 2023"},
       ]
       localStorage.setItem('jContactList', JSON.stringify(arr));
     }
@@ -92,13 +128,14 @@ export class ContactMainComponent implements OnInit {
     
     this.contactDataSource = new MatTableDataSource(this.contactData);
     this.contactDataSourceWithObjectColumn = new MatTableDataSource(this.contactData);
+    console.log(this.contactData)
   }
   
   ngAfterViewInit() {    
     this.contactInstance()
   }
   contactInstance(){
-    //this.empTbSort.disableClear = true;
+    //this.empTbSortContact.disableClear = true;
     this.contactDataSource.sort = this.empTbSortContact;
     this.empTbSortWithObjectContact.disableClear = true;
     this.contactDataSourceWithObjectColumn.sort = this.empTbSortWithObjectContact;

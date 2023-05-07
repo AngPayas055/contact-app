@@ -1,5 +1,5 @@
 <div class="contact-dialog-cont" *ngIf="isEdit">
-  <h3>Edit Contact</h3>
+  <h3>{{headerText}} Contact</h3>
 
 
   <mat-form-field appearance="outline">
@@ -13,7 +13,7 @@
 
   <mat-form-field appearance="outline" class="form-field">
     <mat-label>Full Name</mat-label>
-    <input matInput placeholder="ex. Eren Yeager" [(ngModel)]="editObj.fullName"  value="Sushi" required>
+    <input matInput placeholder="ex. Eren Yeager" [(ngModel)]="editObj.fullName" required>
     <mat-icon matSuffix>stars</mat-icon>
     <!-- <mat-hint>Hint</mat-hint> -->
     <mat-error *ngIf="editObj.fullName?.trim().length === 0">Field is required.</mat-error>
@@ -47,7 +47,7 @@
         editObj.fullName?.trim().length === 0 ||
         editObj.mobileNumber?.trim().length === 0 ||
         editObj.email?.trim().length === 0 
-      ">Update
+      ">{{submitText}}
     </button>
   </div><br>
 </div>

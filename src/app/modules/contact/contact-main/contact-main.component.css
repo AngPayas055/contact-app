@@ -4,6 +4,10 @@
 .th{
     padding: 0 10px 0 0
 }
+.table-cont-j{
+    display: inline-block;
+    overflow-x: auto;
+}
 .td{
     padding: 0 10px 0 0
 }
@@ -17,7 +21,21 @@ th.mat-header-cell:last-of-type, td.mat-cell:last-of-type, td.mat-footer-cell:la
     padding-left: 10px;
 }
 
+.personal {
+    color: #003f5c;
+}
+.header-cont{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.service {
+    color: #bc5090;
+}
 
+.emergency {
+    color: #ffa600;
+}
 
 
 
