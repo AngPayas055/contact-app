@@ -10,13 +10,11 @@ import { MatButtonModule } from "@angular/material/button";
 import { ContactDialogComponent } from './dialog/contact-dialog/contact-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { DoughnutChartComponent } from '../doughnut-chart/doughnut-chart.component';
 
 @NgModule({
   declarations: [
     ContactComponent, 
     ContactMainComponent,
-    DoughnutChartComponent, 
   ],
   imports: [
     CommonModule,
