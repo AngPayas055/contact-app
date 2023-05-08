@@ -16,7 +16,7 @@
                 </button>
             </span>
         </div>
-        <div class="table-cont">
+        <div class="table-wrapper">
             <table
                 mat-table
                 [dataSource]="contactDataSourceWithObjectColumn"
@@ -60,5 +60,7 @@
                 <tr mat-row *matRowDef="let emprowContact; columns: contactDisplayedColumnsWithObject.concat('actions')"></tr> -->
             </table>
         </div>
+        <!-- <div class="table-cont">
+        </div> -->
     </div>
 </div>

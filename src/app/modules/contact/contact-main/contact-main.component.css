@@ -1,15 +1,26 @@
 .table-cont{
     overflow-x: auto;
+    padding-right: 10px;
 }
 .th{
     padding: 0 10px 0 0
 }
 .table-cont-j{
     display: inline-block;
-    overflow-x: auto;
+    /* overflow-x: auto; */
     border: 2px solid #003f5c;
     border-radius: 15px;
     padding: 0 10px 10px 10px;
+    margin: 0 auto;
+    position: relative;
+}
+.table-cont{
+    display: inline-block;
+    overflow-x: auto
+}
+.table-wrapper{
+    width: 100%;
+    overflow-x: auto;
 }
 .td{
     padding: 0 10px 0 0
@@ -43,8 +54,8 @@ th.mat-header-cell:last-of-type, td.mat-cell:last-of-type, td.mat-footer-cell:la
 
 
 
-/* @media only screen and (max-width: 600px) {
-  body {
-    background-color: lightblue;
+@media only screen and (max-width: 825px) {
+  .table-cont-j{
+    width: calc(100vw - 50px);
   }
-} */
+}
