@@ -9,10 +9,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { DialogModule } from './modules/contact/dialog/dialog.module';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+//import { DoughnutChartComponent } from './modules/doughnut-chart/doughnut-chart.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
