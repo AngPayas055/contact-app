@@ -77,6 +77,8 @@ export class ContactMainComponent implements OnInit {
           this.contactData.splice(index, 1);
           localStorage.setItem('jContactList', JSON.stringify(this.contactData));
           this.contactDataSource.sort = this.empTbSortContact;
+          this.contactDataSource = new MatTableDataSource(this.contactData);
+          this.contactDataSourceWithObjectColumn = new MatTableDataSource(this.contactData);
           this.empTbSortWithObjectContact.disableClear = true;
           this.contactDataSourceWithObjectColumn.sort = this.empTbSortWithObjectContact;
         }
