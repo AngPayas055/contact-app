@@ -25,6 +25,7 @@ export class ContactMainComponent implements OnInit {
   contactDataSource = new MatTableDataSource(this.contactData);
   contactDataSourceWithObjectColumn = new MatTableDataSource(this.contactData);
   colors:any = ['#003f5c','#bc5090','#ffa600']
+  jData:any = []
   
   @ViewChild('empTbSortContact') empTbSortContact = new MatSort();
   @ViewChild('empTbSortWithObjectContact') empTbSortWithObjectContact = new MatSort();
@@ -58,6 +59,7 @@ export class ContactMainComponent implements OnInit {
         this.contactDataSource.sort = this.empTbSortContact;
         this.empTbSortWithObjectContact.disableClear = true;
         this.contactDataSourceWithObjectColumn.sort = this.empTbSortWithObjectContact;
+        this.chartDataUpdate()
       }
     });
   }
@@ -81,6 +83,7 @@ export class ContactMainComponent implements OnInit {
           this.contactDataSourceWithObjectColumn = new MatTableDataSource(this.contactData);
           this.empTbSortWithObjectContact.disableClear = true;
           this.contactDataSourceWithObjectColumn.sort = this.empTbSortWithObjectContact;
+          this.chartDataUpdate()
         }
       }
     });
@@ -101,6 +104,7 @@ export class ContactMainComponent implements OnInit {
         this.contactDataSource.sort = this.empTbSortContact;
         this.empTbSortWithObjectContact.disableClear = true;
         this.contactDataSourceWithObjectColumn.sort = this.empTbSortWithObjectContact;
+        this.chartDataUpdate()
         // let dataId = data.updatedData.id
         // data.updatedData.dateUpdated = this.datePipe.transform(this.myDate, 'MMM d, y');
         // this.contactData = this.contactData.map(contact => {
@@ -133,7 +137,7 @@ export class ContactMainComponent implements OnInit {
     this.contactDataSource = new MatTableDataSource(this.contactData);
     this.contactDataSourceWithObjectColumn = new MatTableDataSource(this.contactData);
     console.log(this.contactData)
-    this.createChart()
+    this.chartDataUpdate()
   }
   
   ngAfterViewInit() {    
@@ -146,26 +150,35 @@ export class ContactMainComponent implements OnInit {
     this.contactDataSourceWithObjectColumn.sort = this.empTbSortWithObjectContact;
   }
   
-  createChart(){
 
+  chartDataUpdate(){
+    let dataList = []    
+    dataList.push(this.contactData.filter(item => item.contactType === 'Personal').length)
+    dataList.push(this.contactData.filter(item => item.contactType === 'Service').length)
+    dataList.push(this.contactData.filter(item => item.contactType === 'Emergency').length)
+    console.log('dlist',this.chart)
+    this.jData = dataList
+    this.createChart()
+  }
+  
+  createChart(){
+    if (this.chart) {
+      this.chart.destroy();
+    }
     this.chart = new Chart("MyChart", {
       type: 'doughnut', //this denotes tha type of chart
-
       data: {// values on X-Axis
-        labels: ['Red', 'Pink','Green','Yellow','Orange','Blue', ],
-	       datasets: [{
-    label: 'My First Dataset',
-    data: [300, 240, 100, 432, 253, 34],
-    backgroundColor: [
-      'red',
-      'pink',
-      'green',
-			'yellow',
-      'orange',
-      'blue',			
-    ],
-    hoverOffset: 4
-  }],
+        labels: ['Personal', 'Service','Emergency'],
+	      datasets: [{
+        // label: 'My First Dataset',
+        data: this.jData,//[300, 240, 100],
+        backgroundColor: ['#003f5c','#bc5090','#ffa600',
+          'yellow',
+          'orange',
+          'blue',			
+        ],
+        hoverOffset: 4
+        }],
       },
       options: {
         aspectRatio:2.5

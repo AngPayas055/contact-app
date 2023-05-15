@@ -15,8 +15,13 @@ body{
 .j-cont{
     max-width: 1600px;
     margin: 0 auto;
-    display: flex;
+    display: inline-block;
     flex-direction: column;
+}
+.outer-wrapper{
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
 }
 .d-flex{
     display: flex;
