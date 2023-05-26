@@ -7,6 +7,9 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ContactDialogComponent } from '../dialog/contact-dialog/contact-dialog.component'
 import { DatePipe } from '@angular/common';
 import Chart from 'chart.js/auto';
+import { jsPDF } from 'jspdf';
+import 'jspdf-autotable';
+
 
 @Component({
   selector: 'app-contact-main',
@@ -37,9 +40,26 @@ export class ContactMainComponent implements OnInit {
     private dialog: MatDialog,
     private datePipe: DatePipe) { }
 
+  exportToPdf(): void {
+    const doc = new jsPDF();
+
+    (doc as any).autoTable({
+      head: [['Full Name', 'Mobile Number', 'Email', 'Contact Type', 'Date Updated']],
+      body: this.contactData.map(obj => [
+        obj.fullName,
+        obj.mobileNumber,
+        obj.email,
+        obj.contactType,
+        obj.dateUpdated
+      ])
+    });
+    doc.save('exported-data.pdf');
+  }
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.contactDataSourceWithObjectColumn.filter = filterValue.trim().toLowerCase();
+    console.log(this.contactData)
   }
   onEdit(edit:any){
     const dialogRef = this.dialog.open(ContactDialogComponent, {

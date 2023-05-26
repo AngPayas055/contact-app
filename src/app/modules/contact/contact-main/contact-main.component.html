@@ -3,6 +3,7 @@
         <div class="chart-cont-wrapper">
             <div class="header-section">
 
+
             </div>
             <div class="chart-container">
                 <canvas  id="MyChart" >{{ chart }}</canvas>
@@ -21,10 +22,15 @@
                 </span>
             </div>
             <div class="table-wrapper">
-                <mat-form-field appearance="outline">
-                    <mat-label>Search Contact</mat-label>
-                    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
-                </mat-form-field>
+                <div class="table-actions">                    
+                    <mat-form-field appearance="outline">
+                        <mat-label>Search Contact</mat-label>
+                        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+                    </mat-form-field>
+                    <span>
+                        <button mat-raised-button color="primary" (click)="exportToPdf()">Export to PDF</button>
+                    </span>
+                </div>
                 <table
                     mat-table
                     [dataSource]="contactDataSourceWithObjectColumn"
@@ -68,6 +74,7 @@
                     <tr mat-row *matRowDef="let emprowContact; columns: contactDisplayedColumnsWithObject.concat('actions')"></tr> -->
                 </table>
             </div>
+                <!-- <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator> -->
             <!-- <div class="table-cont">
             </div> -->
         </div>

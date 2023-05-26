@@ -11,6 +11,7 @@ import { ContactDialogComponent } from './dialog/contact-dialog/contact-dialog.c
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { MatInputModule } from '@angular/material/input';
     MatButtonModule,
     MatDialogModule,
     MatFormFieldModule,
-    MatInputModule 
+    MatInputModule,
+    MatPaginatorModule
   ],
   exports:[
     MatTableModule,
