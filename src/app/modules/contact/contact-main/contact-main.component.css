@@ -74,6 +74,10 @@ th.mat-header-cell:last-of-type, td.mat-cell:last-of-type, td.mat-footer-cell:la
     display: flex;
     justify-content: space-between;
 }
+::ng-deep .mat-paginator .mat-form-field {
+    width: 50px !important; /* Adjust the width as needed */
+  }
+
 
 @media only screen and (max-width: 825px) {
   .table-cont-j{

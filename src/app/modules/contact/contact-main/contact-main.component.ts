@@ -9,7 +9,8 @@ import { DatePipe } from '@angular/common';
 import Chart from 'chart.js/auto';
 import { jsPDF } from 'jspdf';
 import 'jspdf-autotable';
-
+import { MatPaginator } from '@angular/material/paginator';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-contact-main',
@@ -32,7 +33,8 @@ export class ContactMainComponent implements OnInit {
   
   @ViewChild('empTbSortContact') empTbSortContact = new MatSort();
   @ViewChild('empTbSortWithObjectContact') empTbSortWithObjectContact = new MatSort();
-  
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
   dataFromDialog: any;
   myDate = new Date();
 
@@ -40,6 +42,11 @@ export class ContactMainComponent implements OnInit {
     private dialog: MatDialog,
     private datePipe: DatePipe) { }
 
+  paginatorPageEvent(event: PageEvent) {
+    const startIndex = event.pageIndex * event.pageSize;
+    const endIndex = startIndex + event.pageSize;
+    this.contactDataSourceWithObjectColumn.data = this.contactData.slice(startIndex, endIndex);
+  }
   exportToPdf(): void {
     const doc = new jsPDF();
 
@@ -166,6 +173,10 @@ export class ContactMainComponent implements OnInit {
   
   ngAfterViewInit() {    
     this.contactInstance()
+    this.contactDataSource.paginator = this.paginator;
+    this.paginator.pageIndex = 0;
+    this.paginator.pageSize = 5; // Adjust the page size as needed
+    this.paginatorPageEvent(this.paginator);
   }
   contactInstance(){
     //this.empTbSortContact.disableClear = true;
