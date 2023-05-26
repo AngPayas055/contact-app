@@ -216,7 +216,12 @@ export class ContactMainComponent implements OnInit {
         }],
       },
       options: {
-        aspectRatio:2.5
+        aspectRatio:2.5,
+        plugins: {
+          legend: {
+            position: 'right'
+          }
+        }
       }
 
     });

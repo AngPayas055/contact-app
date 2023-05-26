@@ -2,6 +2,7 @@
     <div class="j-cont">
         <div class="chart-cont-wrapper">
             <div class="header-section">
+                <h2>Contact</h2>
 
 
             </div>
@@ -14,12 +15,6 @@
 
         <div class="table-cont-j">
             <div class="header-cont">
-                <h2>Contact</h2>
-                <span>            
-                    <button mat-icon-button color="primary" (click)="onAdd()">
-                        <mat-icon>library_add</mat-icon>
-                    </button>
-                </span>
             </div>
             <div class="table-wrapper">
                 <div class="table-actions">                    
@@ -27,8 +22,11 @@
                         <mat-label>Search Contact</mat-label>
                         <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
                     </mat-form-field>
-                    <span>
-                        <button mat-raised-button color="primary" (click)="exportToPdf()">Export to PDF</button>
+                    <span class="btn-contz">     
+                        <button mat-raised-button color="primary" (click)="exportToPdf()">Export to PDF</button>       
+                        <button mat-icon-button color="primary" (click)="onAdd()" class="large-icon-button">
+                            <mat-icon class="mat-icon-size">library_add</mat-icon>
+                        </button>
                     </span>
                 </div>
                 <table
