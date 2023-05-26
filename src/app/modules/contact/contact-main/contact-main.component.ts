@@ -37,6 +37,10 @@ export class ContactMainComponent implements OnInit {
     private dialog: MatDialog,
     private datePipe: DatePipe) { }
 
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.contactDataSourceWithObjectColumn.filter = filterValue.trim().toLowerCase();
+  }
   onEdit(edit:any){
     const dialogRef = this.dialog.open(ContactDialogComponent, {
       data: {

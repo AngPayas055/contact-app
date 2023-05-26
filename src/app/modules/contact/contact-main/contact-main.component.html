@@ -21,6 +21,10 @@
                 </span>
             </div>
             <div class="table-wrapper">
+                <mat-form-field appearance="outline">
+                    <mat-label>Search Contact</mat-label>
+                    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+                </mat-form-field>
                 <table
                     mat-table
                     [dataSource]="contactDataSourceWithObjectColumn"
