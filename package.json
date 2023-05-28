@@ -8,7 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "postinstall": "ngcc",
-    "publish": "set NODE_OPTIONS=--openssl-legacy-provider  && gulp build && ng build --prod"
+    "publish": "NODE_OPTIONS=--openssl-legacy-provider gulp build && ng build --prod"
   },
   "private": true,
   "dependencies": {
