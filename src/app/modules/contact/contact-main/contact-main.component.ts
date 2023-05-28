@@ -11,13 +11,21 @@ import { jsPDF } from 'jspdf';
 import 'jspdf-autotable';
 import { MatPaginator } from '@angular/material/paginator';
 import { PageEvent } from '@angular/material/paginator';
+import {ThemePalette} from '@angular/material/core';
 
+export interface Task {
+  name: string;
+  completed: boolean;
+  color: ThemePalette;
+  subtasks?: Task[];
+}
 @Component({
   selector: 'app-contact-main',
   templateUrl: './contact-main.component.html',
   styleUrls: ['./contact-main.component.css'],
   providers: [DatePipe]
 })
+
 export class ContactMainComponent implements OnInit {
 
   //contact variables
@@ -40,11 +48,42 @@ export class ContactMainComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   dataFromDialog: any;
-  myDate = new Date();
+  myDate = new Date();   
 
   constructor(
     private dialog: MatDialog,
     private datePipe: DatePipe) { }
+    task: Task = {
+      name: 'Indeterminate',
+      completed: false,
+      color: 'primary',
+      subtasks: [
+        {name: 'Primary', completed: false, color: 'primary'},
+        {name: 'Accent', completed: false, color: 'accent'},
+        {name: 'Warn', completed: false, color: 'warn'},
+      ],
+    };
+  
+    allComplete: boolean = false;
+  
+    updateAllComplete() {
+      this.allComplete = this.task.subtasks != null && this.task.subtasks.every(t => t.completed);
+    }
+  
+    someComplete(): boolean {
+      if (this.task.subtasks == null) {
+        return false;
+      }
+      return this.task.subtasks.filter(t => t.completed).length > 0 && !this.allComplete;
+    }
+  
+    setAll(completed: boolean) {
+      this.allComplete = completed;
+      if (this.task.subtasks == null) {
+        return;
+      }
+      this.task.subtasks.forEach(t => (t.completed = completed));
+    }
 
   toggleAddButton(checked: boolean) {
     this.checkedAdd = checked;

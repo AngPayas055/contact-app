@@ -2,19 +2,41 @@
     <div class="j-cont">
         <div class="chart-cont-wrapper">
             <div class="header-section">
-                <h2>Contact</h2>
                 <mat-tab-group animationDuration="1000ms" class="tab-group">
                     <mat-tab label="Setting">
                         <div class="no-scroll">
-                            <mat-slide-toggle color="primary" formControlName="enableWifi" class="setting" [checked]="checkedAdd" (change)="toggleAddButton($event.checked)">Add Contact</mat-slide-toggle><br>
-                            <mat-slide-toggle color="primary" formControlName="acceptTerms" [checked]="checkedEdit" (change)="toggleEditButton($event.checked)">Edit Contact</mat-slide-toggle><br>
-                            <mat-slide-toggle color="primary" formControlName="acceptTerms" [checked]="checkedExport" (change)="toggleExportButton($event.checked)">Export to PDF</mat-slide-toggle>
+                            <mat-slide-toggle color="primary" class="setting" [checked]="checkedAdd" (change)="toggleAddButton($event.checked)">Add Contact</mat-slide-toggle><br>
+                            <mat-slide-toggle color="primary" [checked]="checkedEdit" (change)="toggleEditButton($event.checked)">Edit Contact</mat-slide-toggle><br>
+                            <mat-slide-toggle color="primary" [checked]="checkedExport" (change)="toggleExportButton($event.checked)">Export to PDF</mat-slide-toggle>
                         </div>
                       
                     </mat-tab>
                     <mat-tab label="Delete">
                         <div class="no-scroll">
-                            <mat-slide-toggle  color="warn" formControlName="acceptTerms" [checked]="checkedDelete" (change)="toggleDeleteButton($event.checked)" class="setting">Delete Contact</mat-slide-toggle>
+                            <mat-slide-toggle  color="warn"[checked]="checkedDelete" (change)="toggleDeleteButton($event.checked)" class="setting">Delete Contact</mat-slide-toggle>
+                                                      
+                            <section class="example-section">
+                            <span class="example-list-section">
+                                <mat-checkbox class="example-margin"
+                                            [checked]="allComplete"
+                                            [color]="task.color"
+                                            [indeterminate]="someComplete()"
+                                            (change)="setAll($event.checked)">
+                                {{task.name}}
+                                </mat-checkbox>
+                            </span>
+                            <span class="example-list-section">
+                                <ul>
+                                <li *ngFor="let subtask of task.subtasks">
+                                    <mat-checkbox [(ngModel)]="subtask.completed"
+                                                [color]="subtask.color"
+                                                (ngModelChange)="updateAllComplete()">
+                                    {{subtask.name}}
+                                    </mat-checkbox>
+                                </li>
+                                </ul>
+                            </span>
+                            </section>
                         </div>
                         
                     </mat-tab>
