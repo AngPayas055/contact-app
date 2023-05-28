@@ -3,7 +3,23 @@
         <div class="chart-cont-wrapper">
             <div class="header-section">
                 <h2>Contact</h2>
-
+                <mat-tab-group animationDuration="1000ms" class="tab-group">
+                    <mat-tab label="Setting">
+                        <div class="no-scroll">
+                            <mat-slide-toggle color="primary" formControlName="enableWifi" class="setting" [checked]="checkedAdd" (change)="toggleAddButton($event.checked)">Add Contact</mat-slide-toggle><br>
+                            <mat-slide-toggle color="primary" formControlName="acceptTerms" [checked]="checkedEdit" (change)="toggleEditButton($event.checked)">Edit Contact</mat-slide-toggle><br>
+                            <mat-slide-toggle color="primary" formControlName="acceptTerms" [checked]="checkedExport" (change)="toggleExportButton($event.checked)">Export to PDF</mat-slide-toggle>
+                        </div>
+                      
+                    </mat-tab>
+                    <mat-tab label="Delete">
+                        <div class="no-scroll">
+                            <mat-slide-toggle  color="warn" formControlName="acceptTerms" [checked]="checkedDelete" (change)="toggleDeleteButton($event.checked)" class="setting">Delete Contact</mat-slide-toggle>
+                        </div>
+                        
+                    </mat-tab>
+                    <!-- <mat-tab label="Third">Content 3</mat-tab> -->
+                </mat-tab-group>
 
             </div>
             <div class="chart-container">
@@ -23,8 +39,8 @@
                         <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
                     </mat-form-field>
                     <span class="btn-contz">     
-                        <button mat-raised-button color="primary" (click)="exportToPdf()">Export to PDF</button>       
-                        <button mat-icon-button color="primary" (click)="onAdd()" class="large-icon-button">
+                        <button mat-raised-button color="primary" (click)="exportToPdf()" [disabled]="!checkedExport">Export to PDF</button>       
+                        <button mat-icon-button color="primary" (click)="onAdd()" class="large-icon-button" [disabled]="!checkedAdd">
                             <mat-icon class="mat-icon-size">library_add</mat-icon>
                         </button>
                     </span>
@@ -56,11 +72,11 @@
                         <th mat-header-cell *matHeaderCellDef> <span class="th pl-ten">Actions</span></th>
                         <td mat-cell *matCellDef="let emprowContact">
                             <span class="d-flex td">
-                                <button mat-icon-button color="primary" (click)="onEdit(emprowContact)">
-                                <mat-icon>edit</mat-icon>
+                                <button mat-icon-button color="primary" (click)="onEdit(emprowContact)" [disabled]="!checkedEdit">
+                                    <mat-icon>edit</mat-icon>
                                 </button>
-                                <button mat-icon-button color="warn" (click)="onDelete(emprowContact)">
-                                <mat-icon>delete</mat-icon>
+                                <button mat-icon-button color="warn" (click)="onDelete(emprowContact)" [disabled]="!checkedDelete">
+                                    <mat-icon>delete</mat-icon>
                                 </button>
                             </span>
                         </td>
@@ -71,7 +87,7 @@
                     <!-- <tr mat-header-row *matHeaderRowDef="contactDisplayedColumnsWithObject.concat('actions')"></tr>
                     <tr mat-row *matRowDef="let emprowContact; columns: contactDisplayedColumnsWithObject.concat('actions')"></tr> -->
                 </table>
-                <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" (page)="paginatorPageEvent($event)" showFirstLastButtons></mat-paginator>
+                <mat-paginator [pageSizeOptions]="[10, 15, 30, 50]" (page)="paginatorPageEvent($event)" showFirstLastButtons></mat-paginator>
 
             </div>
 

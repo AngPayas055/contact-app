@@ -10,6 +10,7 @@ import { DialogModule } from './modules/contact/dialog/dialog.module';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import {MatTabsModule} from '@angular/material/tabs';
 //import { DoughnutChartComponent } from './modules/doughnut-chart/doughnut-chart.component';
 
 @NgModule({
@@ -25,7 +26,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatSelectModule,
     FormsModule,
     ReactiveFormsModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent],

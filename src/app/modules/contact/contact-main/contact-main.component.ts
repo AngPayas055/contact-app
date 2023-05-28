@@ -30,7 +30,11 @@ export class ContactMainComponent implements OnInit {
   contactDataSourceWithObjectColumn = new MatTableDataSource(this.contactData);
   colors:any = ['#003f5c','#bc5090','#ffa600']
   jData:any = []
-  
+  checkedAdd:boolean = true
+  checkedEdit:boolean = true
+  checkedDelete:boolean = true
+  checkedExport:boolean = true
+
   @ViewChild('empTbSortContact') empTbSortContact = new MatSort();
   @ViewChild('empTbSortWithObjectContact') empTbSortWithObjectContact = new MatSort();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -42,6 +46,18 @@ export class ContactMainComponent implements OnInit {
     private dialog: MatDialog,
     private datePipe: DatePipe) { }
 
+  toggleAddButton(checked: boolean) {
+    this.checkedAdd = checked;
+  }
+  toggleEditButton(checked: boolean) {
+    this.checkedEdit = checked;
+  }
+  toggleDeleteButton(checked: boolean) {
+    this.checkedDelete = checked;
+  }
+  toggleExportButton(checked: boolean) {
+    this.checkedExport = checked;
+  }
   paginatorPageEvent(event: PageEvent) {
     const startIndex = event.pageIndex * event.pageSize;
     const endIndex = startIndex + event.pageSize;
@@ -174,9 +190,9 @@ export class ContactMainComponent implements OnInit {
   ngAfterViewInit() {    
     this.contactInstance()
     this.contactDataSource.paginator = this.paginator;
-    this.paginator.pageIndex = 0;
-    this.paginator.pageSize = 5; // Adjust the page size as needed
-    this.paginatorPageEvent(this.paginator);
+    // this.paginator.pageIndex = 0;
+    // this.paginator.pageSize = 5; // Adjust the page size as needed
+    // this.paginatorPageEvent(this.paginator);
   }
   contactInstance(){
     //this.empTbSortContact.disableClear = true;

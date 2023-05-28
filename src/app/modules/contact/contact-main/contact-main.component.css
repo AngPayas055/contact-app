@@ -52,15 +52,15 @@ th.mat-header-cell:last-of-type, td.mat-cell:last-of-type, td.mat-footer-cell:la
 }
 .chart-container{
     position: relative; 
-    width: 400px;
-    height: 158px;
+    min-width: 380px;
+    height: 178px;
     padding: 15px 0;
     border: 2px solid #003f5c;
     border-radius: 15px;
     margin-bottom: 15px;
 }
 .header-section{
-    padding: 15px;
+    padding: 0 15px;
     border: 2px solid #003f5c;
     border-radius: 15px;
     margin-bottom: 15px;
@@ -79,12 +79,26 @@ th.mat-header-cell:last-of-type, td.mat-cell:last-of-type, td.mat-footer-cell:la
     margin-top: 15px;
 }
 ::ng-deep .mat-paginator .mat-form-field {
-    width: 50px !important; /* Adjust the width as needed */
+    width: 30px !important; /* Adjust the width as needed */
   }
 .mat-icon-size {
     font-size: 40px !important;
 }
-
+h2{
+    margin: 15px 0 0 0;
+}
+.setting{
+    padding: 5px 0 0 0;
+}
+::ng-deep.mat-tab-label, ::ng-deep.mat-tab-label-active{
+    min-width: 0!important;
+    padding: 3px!important;
+    margin: 3px!important;
+   }
+.no-scroll {
+    overflow: hidden;
+    padding-left: 15px;
+}
 
 
 @media only screen and (max-width: 825px) {
