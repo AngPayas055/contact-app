@@ -49,6 +49,7 @@ export class ContactMainComponent implements OnInit {
 
   dataFromDialog: any;
   myDate = new Date();   
+  allComplete: boolean = false;
 
   constructor(
     private dialog: MatDialog,
@@ -56,16 +57,39 @@ export class ContactMainComponent implements OnInit {
     task: Task = {
       name: 'Indeterminate',
       completed: false,
-      color: 'primary',
+      color: 'warn',
       subtasks: [
-        {name: 'Primary', completed: false, color: 'primary'},
-        {name: 'Accent', completed: false, color: 'accent'},
-        {name: 'Warn', completed: false, color: 'warn'},
+        {name: 'Personal', completed: false, color: 'primary'},
+        {name: 'Service', completed: false, color: 'primary'},
+        {name: 'Emergency', completed: false, color: 'primary'},
       ],
     };
-  
-    allComplete: boolean = false;
-  
+    
+    deleteSelected(){
+      if(this.task.subtasks && this.task.subtasks[0].completed == true){
+        console.log('true')
+
+        this.contactData = this.contactData.filter(contact => contact.contactType !== "Personal")
+      }if(this.task.subtasks && this.task.subtasks[1].completed == true){
+        console.log('true')
+
+        this.contactData = this.contactData.filter(contact => contact.contactType !== "Service")
+      }if(this.task.subtasks && this.task.subtasks[2].completed == true){
+        console.log('true')
+
+        this.contactData = this.contactData.filter(contact => contact.contactType !== "Emergency")
+      }
+      localStorage.setItem('jContactList', JSON.stringify(this.contactData));
+      this.contactDataSource.sort = this.empTbSortContact;
+      this.contactDataSource = new MatTableDataSource(this.contactData);
+      this.contactDataSourceWithObjectColumn = new MatTableDataSource(this.contactData);
+      this.empTbSortWithObjectContact.disableClear = true;
+      this.contactDataSourceWithObjectColumn.sort = this.empTbSortWithObjectContact;
+      this.chartDataUpdate()
+      // this.ngOnInit()
+    this.contactDataSource.paginator = this.paginator;
+      console.log(this.contactData)
+    }
     updateAllComplete() {
       this.allComplete = this.task.subtasks != null && this.task.subtasks.every(t => t.completed);
     }
@@ -274,7 +298,7 @@ export class ContactMainComponent implements OnInit {
         aspectRatio:2.5,
         plugins: {
           legend: {
-            position: 'right'
+            position: 'left'
           }
         }
       }

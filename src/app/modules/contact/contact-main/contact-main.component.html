@@ -1,3 +1,4 @@
+<h1 class="text-center">Contact Manager</h1>
 <div class="outer-wrapper">
     <div class="j-cont">
         <div class="chart-cont-wrapper">
@@ -13,30 +14,40 @@
                     </mat-tab>
                     <mat-tab label="Delete">
                         <div class="no-scroll">
-                            <mat-slide-toggle  color="warn"[checked]="checkedDelete" (change)="toggleDeleteButton($event.checked)" class="setting">Delete Contact</mat-slide-toggle>
-                                                      
-                            <section class="example-section">
-                            <span class="example-list-section">
-                                <mat-checkbox class="example-margin"
-                                            [checked]="allComplete"
-                                            [color]="task.color"
-                                            [indeterminate]="someComplete()"
-                                            (change)="setAll($event.checked)">
-                                {{task.name}}
-                                </mat-checkbox>
-                            </span>
-                            <span class="example-list-section">
-                                <ul>
-                                <li *ngFor="let subtask of task.subtasks">
-                                    <mat-checkbox [(ngModel)]="subtask.completed"
-                                                [color]="subtask.color"
-                                                (ngModelChange)="updateAllComplete()">
-                                    {{subtask.name}}
-                                    </mat-checkbox>
-                                </li>
-                                </ul>
-                            </span>
-                            </section>
+                            <mat-slide-toggle  color="warn"[checked]="checkedDelete" (change)="toggleDeleteButton($event.checked)" class="setting">Delete Button</mat-slide-toggle>
+                             
+                            <div class="checkbox-group">                         
+                                <section class="example-section">
+                                    <span class="example-list-section">
+                                        <mat-checkbox class="example-margin"
+                                                    [checked]="allComplete"
+                                                    [color]="task.color"
+                                                    [indeterminate]="someComplete()"
+                                                    (change)="setAll($event.checked)">
+                                        {{task.name}}
+                                        </mat-checkbox>
+                                    </span>
+                                    <div></div>
+                                    <span class="example-list-section">
+                                        <ul>
+                                        <li *ngFor="let subtask of task.subtasks">
+                                            <mat-checkbox [(ngModel)]="subtask.completed"
+                                                        [color]="subtask.color"
+                                                        (ngModelChange)="updateAllComplete()">
+                                            {{subtask.name}}
+                                            </mat-checkbox>
+                                        </li>
+                                        </ul>
+                                    </span>
+                                    <div></div>
+                                </section>
+                                <span class="del-btn-cont">
+                                    <!-- <button mat-raised-button color="warn" (click)="deleteSelected()" class="d-sel">Delete Selected</button>  -->
+                                    <button mat-icon-button color="warn" (click)="deleteSelected()" class="large-icon-button">
+                                        <mat-icon class="mat-icon-size-del">delete_forever</mat-icon>
+                                    </button>
+                                </span>
+                            </div>
                         </div>
                         
                     </mat-tab>
@@ -44,8 +55,11 @@
                 </mat-tab-group>
 
             </div>
-            <div class="chart-container">
-                <canvas  id="MyChart" >{{ chart }}</canvas>
+            <div class="chart-wrap">
+                <h2 class="ctc-title">Contact Type Chart</h2>
+                <div class="chart-container">
+                    <canvas  id="MyChart" >{{ chart }}</canvas>
+                </div>
             </div>
         </div>
 
@@ -55,17 +69,17 @@
             <div class="header-cont">
             </div>
             <div class="table-wrapper">
+                <span class="btn-contz">     
+                    <button mat-raised-button color="primary" (click)="exportToPdf()" [disabled]="!checkedExport">Export to PDF</button>       
+                    <button mat-icon-button color="primary" (click)="onAdd()" class="large-icon-button" [disabled]="!checkedAdd">
+                        <mat-icon class="mat-icon-size">library_add</mat-icon>
+                    </button>
+                </span>
                 <div class="table-actions">                    
                     <mat-form-field appearance="outline">
                         <mat-label>Search Contact</mat-label>
                         <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
                     </mat-form-field>
-                    <span class="btn-contz">     
-                        <button mat-raised-button color="primary" (click)="exportToPdf()" [disabled]="!checkedExport">Export to PDF</button>       
-                        <button mat-icon-button color="primary" (click)="onAdd()" class="large-icon-button" [disabled]="!checkedAdd">
-                            <mat-icon class="mat-icon-size">library_add</mat-icon>
-                        </button>
-                    </span>
                 </div>
                 <table
                     mat-table
@@ -117,4 +131,7 @@
             </div> -->
         </div>
     </div>
+</div>
+<div>
+    <h3 class="text-center">Design & Created by Jhon</h3>
 </div>

@@ -21,6 +21,7 @@
 .table-wrapper{
     width: 100%;
     overflow-x: auto;
+    padding-top: 15px;
 }
 .td{
     padding: 0 10px 0 0
@@ -50,17 +51,36 @@ th.mat-header-cell:last-of-type, td.mat-cell:last-of-type, td.mat-footer-cell:la
 .emergency {
     color: #ffa600;
 }
-.chart-container{
+.chart-wrap{
     position: relative; 
+    min-width: 380px;
+    min-height: 200px;
+    padding: 15px 0;
+    border: 2px solid #003f5c;
+    border-radius: 15px;
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+.chart-container{
+    margin-left: 15px;
+    display: flex;
+    justify-content: center;
+    /* position: relative; 
     min-width: 380px;
     height: 178px;
     padding: 15px 0;
     border: 2px solid #003f5c;
     border-radius: 15px;
-    margin-bottom: 15px;
+    margin-bottom: 15px; */
+}
+.checkbox-group{
+    display: flex;
+    align-items: center;
 }
 .header-section{
-    padding: 0 15px;
+    padding: 0 0 0 15px;
     border: 2px solid #003f5c;
     border-radius: 15px;
     margin-bottom: 15px;
@@ -84,7 +104,10 @@ th.mat-header-cell:last-of-type, td.mat-cell:last-of-type, td.mat-footer-cell:la
 .mat-icon-size {
     font-size: 40px !important;
 }
-h2{
+.mat-icon-size-del {
+    font-size: 60px !important;
+}
+.h2{
     margin: 15px 0 0 0;
 }
 .setting{
@@ -98,6 +121,14 @@ h2{
 .no-scroll {
     overflow: hidden;
     padding-left: 15px;
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+    min-width: 250px;
+    margin-bottom: 15px;
+}
+.btn-contz{
+    padding-top: 15px;
 }
 .example-section {
     margin: 12px 0;
@@ -111,9 +142,48 @@ h2{
     list-style-type: none;
     margin-top: 4px;
   }
-
+  .d-sel{
+    margin-bottom: 15px;
+  }
+.ctc-title{
+    text-align: center;
+    margin-top: 0;
+}
+.del-btn-cont{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.text-center{
+    text-align: center;
+}
 @media only screen and (max-width: 825px) {
   .table-cont-j{
-    width: calc(100vw - 50px);
+    width: calc(100vw - 40px);
   }
+}
+@media only screen and (max-width: 728px) {
+    .chart-cont-wrapper{
+        display: flex;
+        flex-direction: column;
+    }
+    .header-section{
+        width: calc(100vw - 35px);
+    }
+    .chart-wrap{
+        /* min-width: 200px; */
+        padding: 0 15px 0 0;
+        overflow: hidden;
+        margin-right: 15px;
+    }
+    .chart-container{
+        overflow-x: hidden;
+        margin-bottom: 20px;
+    }
+}
+@media only screen and (max-width: 425px) {
+    .chart-wrap{
+        display: none;
+    }
 }
