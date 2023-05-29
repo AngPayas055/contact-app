@@ -50,6 +50,7 @@ export class ContactMainComponent implements OnInit {
   dataFromDialog: any;
   myDate = new Date();   
   allComplete: boolean = false;
+  textArea: string = "ex. Eren Yeager"
 
   constructor(
     private dialog: MatDialog,

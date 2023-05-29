@@ -62,25 +62,34 @@
                 </div>
             </div>
         </div>
-
-
+        <div class="textarea-div">
+            <mat-form-field appearance="outline"  (click)="onAdd()" class="mt-15">
+                <mat-label>Create Contact</mat-label>
+                <textarea matInput disabled  [(ngModel)]="textArea"
+                            cdkTextareaAutosize 
+                            #autosize="cdkTextareaAutosize"
+                            cdkAutosizeMinRows="2"
+                            cdkAutosizeMaxRows="5"></textarea>
+            </mat-form-field>
+            <span class="quote"><h3>Building relationships, <br>one contact at a time.</h3></span>
+        </div>
 
         <div class="table-cont-j">
             <div class="header-cont">
             </div>
+            <span class="btn-contz">     
+                <button mat-raised-button color="primary" (click)="exportToPdf()" [disabled]="!checkedExport" *ngIf="contactData.length > 0">Export to PDF</button>       
+                <button mat-icon-button color="primary" (click)="onAdd()" class="large-icon-button" [disabled]="!checkedAdd">
+                    <mat-icon class="mat-icon-size">library_add</mat-icon>
+                </button>
+            </span>
+            <div class="table-actions" *ngIf="contactData.length > 0">                    
+                <mat-form-field appearance="outline">
+                    <mat-label>Search Contact</mat-label>
+                    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+                </mat-form-field>
+            </div>
             <div class="table-wrapper">
-                <span class="btn-contz">     
-                    <button mat-raised-button color="primary" (click)="exportToPdf()" [disabled]="!checkedExport" *ngIf="contactData.length > 0">Export to PDF</button>       
-                    <button mat-icon-button color="primary" (click)="onAdd()" class="large-icon-button" [disabled]="!checkedAdd">
-                        <mat-icon class="mat-icon-size">library_add</mat-icon>
-                    </button>
-                </span>
-                <div class="table-actions" *ngIf="contactData.length > 0">                    
-                    <mat-form-field appearance="outline">
-                        <mat-label>Search Contact</mat-label>
-                        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
-                    </mat-form-field>
-                </div>
                 <table
                     mat-table
                     [dataSource]="contactDataSourceWithObjectColumn"
@@ -123,9 +132,9 @@
                     <!-- <tr mat-header-row *matHeaderRowDef="contactDisplayedColumnsWithObject.concat('actions')"></tr>
                     <tr mat-row *matRowDef="let emprowContact; columns: contactDisplayedColumnsWithObject.concat('actions')"></tr> -->
                 </table>
-                <mat-paginator [pageSizeOptions]="[10, 15, 30, 50]" (page)="paginatorPageEvent($event)" showFirstLastButtons></mat-paginator>
 
             </div>
+            <mat-paginator [pageSizeOptions]="[10, 15, 30, 50]" (page)="paginatorPageEvent($event)" showFirstLastButtons></mat-paginator>
 
             <!-- <div class="table-cont">
             </div> -->
