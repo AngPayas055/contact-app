@@ -207,11 +207,18 @@ export class ContactMainComponent implements OnInit {
     dialogRef.afterClosed().subscribe((data) => {
       if(data){
         // let lastObjId = this.contactData[]
-        data.updatedData.id = this.contactData[this.contactData.length - 1].id + 1
+        if(this.contactData.length > 0){
+          data.updatedData.id = this.contactData[this.contactData.length - 1].id + 1
+        }else if (this.contactData.length == 0){
+          data.updatedData.id = 1
+        }
+
         data.updatedData.dateUpdated = this.datePipe.transform(this.myDate, 'MMM d, y');
         this.contactData.push(data.updatedData)
         localStorage.setItem('jContactList', JSON.stringify(this.contactData));
         this.contactDataSource.sort = this.empTbSortContact;
+        this.empTbSortWithObjectContact.disableClear = true;
+        this.contactDataSourceWithObjectColumn.sort = this.empTbSortWithObjectContact;
         this.empTbSortWithObjectContact.disableClear = true;
         this.contactDataSourceWithObjectColumn.sort = this.empTbSortWithObjectContact;
         this.chartDataUpdate()
