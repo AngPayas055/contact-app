@@ -70,12 +70,12 @@
             </div>
             <div class="table-wrapper">
                 <span class="btn-contz">     
-                    <button mat-raised-button color="primary" (click)="exportToPdf()" [disabled]="!checkedExport">Export to PDF</button>       
+                    <button mat-raised-button color="primary" (click)="exportToPdf()" [disabled]="!checkedExport" *ngIf="contactData.length > 0">Export to PDF</button>       
                     <button mat-icon-button color="primary" (click)="onAdd()" class="large-icon-button" [disabled]="!checkedAdd">
                         <mat-icon class="mat-icon-size">library_add</mat-icon>
                     </button>
                 </span>
-                <div class="table-actions">                    
+                <div class="table-actions" *ngIf="contactData.length > 0">                    
                     <mat-form-field appearance="outline">
                         <mat-label>Search Contact</mat-label>
                         <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
