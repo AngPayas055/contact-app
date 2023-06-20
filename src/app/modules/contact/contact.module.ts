@@ -16,11 +16,12 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ActivityComponent } from './activity/activity.component';
 
 @NgModule({
   declarations: [
     ContactComponent, 
-    ContactMainComponent,
+    ContactMainComponent, ActivityComponent,
   ],
   imports: [
     CommonModule,
